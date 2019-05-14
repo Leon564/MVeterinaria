@@ -21,13 +21,30 @@ namespace MVeterinaria.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("DBVeterinaria", throwIfV1Schema: false)
         {
         }
+        DbSet<Veterinario> Veterinarios { get; set; }
+        DbSet<Cliente> Clientes { get; set; }
+        DbSet<Cita> Citas { get; set; }
+        DbSet<Boleta> Boletas { get; set; }
+        DbSet<Administrador> Administradores { get; set; }
 
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<MVeterinaria.Models.Cita> Citas { get; set; }
+
+        public System.Data.Entity.DbSet<MVeterinaria.Models.Boleta> Boletas { get; set; }
+
+        public System.Data.Entity.DbSet<MVeterinaria.Models.Mascota> Mascotas { get; set; }
+
+        public System.Data.Entity.DbSet<MVeterinaria.Models.Veterinario> Veterinarios { get; set; }
+
+        public System.Data.Entity.DbSet<MVeterinaria.Models.Cliente> Clientes { get; set; }
+
+        public System.Data.Entity.DbSet<MVeterinaria.Models.Administrador> Administradors { get; set; }
     }
 }
