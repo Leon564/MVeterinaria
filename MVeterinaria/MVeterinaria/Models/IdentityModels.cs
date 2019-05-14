@@ -24,11 +24,11 @@ namespace MVeterinaria.Models
             : base("DBVeterinaria", throwIfV1Schema: false)
         {
         }
-        DbSet<Veterinario> Veterinarios { get; set; }
-        DbSet<Cliente> Clientes { get; set; }
-        DbSet<Cita> Citas { get; set; }
-        DbSet<Boleta> Boletas { get; set; }
-        DbSet<Administrador> Administradores { get; set; }
+        //DbSet<Veterinario> Veterinarios { get; set; }
+        //DbSet<Cliente> Clientes { get; set; }
+        //DbSet<Cita> Citas { get; set; }
+        //DbSet<Boleta> Boletas { get; set; }
+        //DbSet<Administrador> Administradores { get; set; }
 
         public static ApplicationDbContext Create()
         {
