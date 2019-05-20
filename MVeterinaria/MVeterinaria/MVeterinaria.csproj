@@ -193,6 +193,14 @@
     <Compile Include="Migrations\201905140342327_inicial.Designer.cs">
       <DependentUpon>201905140342327_inicial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905200219451_seg.cs" />
+    <Compile Include="Migrations\201905200219451_seg.Designer.cs">
+      <DependentUpon>201905200219451_seg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905200234462_segu.cs" />
+    <Compile Include="Migrations\201905200234462_segu.Designer.cs">
+      <DependentUpon>201905200234462_segu.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Administrador.cs" />
@@ -529,11 +537,6 @@
     <Content Include="Views\Citas\Details.cshtml" />
     <Content Include="Views\Citas\Edit.cshtml" />
     <Content Include="Views\Citas\Index.cshtml" />
-    <Content Include="Views\Boletas\Create.cshtml" />
-    <Content Include="Views\Boletas\Delete.cshtml" />
-    <Content Include="Views\Boletas\Details.cshtml" />
-    <Content Include="Views\Boletas\Edit.cshtml" />
-    <Content Include="Views\Boletas\Index.cshtml" />
     <Content Include="Views\Clientes\Create.cshtml" />
     <Content Include="Views\Clientes\Delete.cshtml" />
     <Content Include="Views\Clientes\Details.cshtml" />
@@ -554,6 +557,11 @@
     <Content Include="Views\Mascotas\Details.cshtml" />
     <Content Include="Views\Mascotas\Edit.cshtml" />
     <Content Include="Views\Mascotas\Index.cshtml" />
+    <Content Include="Views\Boletas\Create.cshtml" />
+    <Content Include="Views\Boletas\Delete.cshtml" />
+    <Content Include="Views\Boletas\Details.cshtml" />
+    <Content Include="Views\Boletas\Edit.cshtml" />
+    <Content Include="Views\Boletas\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -577,6 +585,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905140342327_inicial.resx">
       <DependentUpon>201905140342327_inicial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905200219451_seg.resx">
+      <DependentUpon>201905200219451_seg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905200234462_segu.resx">
+      <DependentUpon>201905200234462_segu.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

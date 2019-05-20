@@ -13,5 +13,8 @@ namespace MVeterinaria.Models
         public int VeterinarioId { get; set; }
         public Mascota Mascota { get; set; }
         public int MascotaId { get; set; }
+        
+     
+
     }
 }
