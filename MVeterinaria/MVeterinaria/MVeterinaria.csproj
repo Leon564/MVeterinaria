@@ -185,21 +185,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201905140341341_ini.cs" />
-    <Compile Include="Migrations\201905140341341_ini.Designer.cs">
-      <DependentUpon>201905140341341_ini.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201905140342327_inicial.cs" />
-    <Compile Include="Migrations\201905140342327_inicial.Designer.cs">
-      <DependentUpon>201905140342327_inicial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201905200219451_seg.cs" />
-    <Compile Include="Migrations\201905200219451_seg.Designer.cs">
-      <DependentUpon>201905200219451_seg.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201905200234462_segu.cs" />
-    <Compile Include="Migrations\201905200234462_segu.Designer.cs">
-      <DependentUpon>201905200234462_segu.cs</DependentUpon>
+    <Compile Include="Migrations\201905212312200_ini.cs" />
+    <Compile Include="Migrations\201905212312200_ini.Designer.cs">
+      <DependentUpon>201905212312200_ini.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -459,6 +447,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="images\icono-cliente1.png" />
     <Content Include="images\Sin título.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -532,11 +521,6 @@
     <Content Include="Views\Shared\Profile.cshtml" />
     <Content Include="Views\Shared\Menus.cshtml" />
     <Content Include="Views\Shared\Erro.cshtml" />
-    <Content Include="Views\Citas\Create.cshtml" />
-    <Content Include="Views\Citas\Delete.cshtml" />
-    <Content Include="Views\Citas\Details.cshtml" />
-    <Content Include="Views\Citas\Edit.cshtml" />
-    <Content Include="Views\Citas\Index.cshtml" />
     <Content Include="Views\Clientes\Create.cshtml" />
     <Content Include="Views\Clientes\Delete.cshtml" />
     <Content Include="Views\Clientes\Details.cshtml" />
@@ -557,11 +541,16 @@
     <Content Include="Views\Mascotas\Details.cshtml" />
     <Content Include="Views\Mascotas\Edit.cshtml" />
     <Content Include="Views\Mascotas\Index.cshtml" />
-    <Content Include="Views\Boletas\Create.cshtml" />
     <Content Include="Views\Boletas\Delete.cshtml" />
     <Content Include="Views\Boletas\Details.cshtml" />
     <Content Include="Views\Boletas\Edit.cshtml" />
     <Content Include="Views\Boletas\Index.cshtml" />
+    <Content Include="Views\Boletas\Create.cshtml" />
+    <Content Include="Views\Citas\Create.cshtml" />
+    <Content Include="Views\Citas\Delete.cshtml" />
+    <Content Include="Views\Citas\Details.cshtml" />
+    <Content Include="Views\Citas\Edit.cshtml" />
+    <Content Include="Views\Citas\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -580,17 +569,8 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201905140341341_ini.resx">
-      <DependentUpon>201905140341341_ini.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905140342327_inicial.resx">
-      <DependentUpon>201905140342327_inicial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905200219451_seg.resx">
-      <DependentUpon>201905200219451_seg.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905200234462_segu.resx">
-      <DependentUpon>201905200234462_segu.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201905212312200_ini.resx">
+      <DependentUpon>201905212312200_ini.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

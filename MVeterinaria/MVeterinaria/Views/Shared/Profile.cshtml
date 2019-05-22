@@ -1,43 +1,108 @@
-﻿<li class="dropdown user user-menu">
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+
+{
+<li class="dropdown user user-menu">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
         <img src="~/assets/img/logo.jpg" class="user-image" alt="User Image">
         <span class="hidden-xs">Erikson Melgarejo</span>
     </a>
+   
     <ul class="dropdown-menu">
         <!-- User image -->
         <li class="user-header">
-            <img src="~/assets/img/logo.jpg" class="img-circle" alt="User Image">
+            <img src="~/images/icono-cliente1.png" class="img-circle" alt="User Image">
             <p>
-                Erikson Melgarejo
-                <small>eriksonlove@gmail.com</small>
+                 @{
+                     var a = User.Identity.GetUserId();
+                     
+
+
+
+                     }
+                @Html.ActionLink(User.Identity.GetUserName() , "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @style = "color:#FFFFFF;" })
+                
             </p>
         </li>
         <!-- Menu Body -->
         @*<li class="user-body">
-            <div class="row">
-                <div class="col-xs-4 text-center">
-                    <a href="#">Followers</a>
+                <div class="row">
+                    <div class="col-xs-4 text-center">
+                        <a href="#">Followers</a>
+                    </div>
+                    <div class="col-xs-4 text-center">
+                        <a href="#">Sales</a>
+                    </div>
+                    <div class="col-xs-4 text-center">
+                        <a href="#">Friends</a>
+                    </div>
                 </div>
-                <div class="col-xs-4 text-center">
-                    <a href="#">Sales</a>
-                </div>
-                <div class="col-xs-4 text-center">
-                    <a href="#">Friends</a>
-                </div>
-            </div>
-        </li>*@
+            </li>*@
         <!-- Menu Footer-->
         <li class="user-footer">
             <div class="pull-left">
                 <a href="#" class="btn btn-default btn-flat"><i class="fa fa-user"></i>&nbsp;Perfil</a>
             </div>
             <div class="pull-right">
-                @using (Html.BeginForm("LogOff", "Conta",new{Area =""}))
+             
+                @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
                 {
                     @Html.AntiForgeryToken()
-                    <button class="btn btn-default btn-flat" type="submit"><i class="fa fa-sign-out"></i>&nbsp;Sair</button>
+                    <button class="btn btn-default btn-flat" href="javascript:document.getElementById('logoutForm').submit()" type="submit"><i class="fa fa-sign-out"></i>&nbsp;Sair</button>
                 }
             </div>
         </li>
     </ul>
+
 </li>
+}
+else
+{
+    <li class="dropdown user user-menu">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <img src="~/assets/img/logo.jpg" class="user-image" alt="User Image">
+            <span class="hidden-xs">Erikson Melgarejo</span>
+        </a>
+        <ul class="dropdown-menu">
+            <!-- User image -->
+            <li class="user-header">
+                <img src="~/images/Sin título.Png" class="img-circle" alt="User Image">
+                
+            </li>
+            <!-- Menu Body -->
+            @*<li class="user-body">
+                    <div class="row">
+                        <div class="col-xs-4 text-center">
+                            <a href="#">Followers</a>
+                        </div>
+                        <div class="col-xs-4 text-center">
+                            <a href="#">Sales</a>
+                        </div>
+                        <div class="col-xs-4 text-center">
+                            <a href="#">Friends</a>
+                        </div>
+                    </div>
+                </li>*@
+            <!-- Menu Footer-->
+            <li class="user-footer">
+                <div class="pull-left">
+                    @Html.AntiForgeryToken()
+                    @using (Html.BeginForm("Login", "Account", new { Area = "" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <button class="btn btn-default btn-flat" type="submit" id="loginLink"><i class="fa fa-sign-out"></i>&nbsp;Iniciar sesión</button>
+                    }
+                </div>
+                <div class="pull-right">
+                    @Html.AntiForgeryToken()
+                    @using (Html.BeginForm("Register", "Account", new { Area = "" }))
+                    { 
+                        @Html.AntiForgeryToken()
+                        
+                        <button class="btn btn-default btn-flat" type="submit" id="registerLink"><i class="fa fa-sign-out"></i>&nbsp;Registrarse</button>
+                    }
+                </div>
+            </li>
+        </ul>
+    </li>
+}

@@ -35,7 +35,7 @@ namespace MVeterinaria.Controllers
             }
             return View(boleta);
         }
-
+        [Authorize]
         // GET: Boletas/Create
         public ActionResult Create()
         {
@@ -49,13 +49,14 @@ namespace MVeterinaria.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "BoletaId,FechaEmision,VeterinarioId,MascotaId")] Boleta boleta)
+       
+        public ActionResult Create([Bind(Include = "BoletaId,MascotaId,FechaEmision,VeterinarioId")] Boleta boleta)
         {
             if (ModelState.IsValid)
             {
                 db.Boletas.Add(boleta);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Create","Citas");
             }
 
             ViewBag.MascotaId = new SelectList(db.Mascotas, "MascotaId", "Nombre", boleta.MascotaId);
@@ -85,7 +86,7 @@ namespace MVeterinaria.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "BoletaId,FechaEmision,VeterinarioId,MascotaId")] Boleta boleta)
+        public ActionResult Edit([Bind(Include = "BoletaId,MascotaId,FechaEmision,VeterinarioId")] Boleta boleta)
         {
             if (ModelState.IsValid)
             {

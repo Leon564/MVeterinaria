@@ -64,6 +64,15 @@ namespace MVeterinaria.Models
 
     public class RegisterViewModel
     {
+
+        [Required]
+        [Display(Name = "Nombre")]
+        public string Nombre { get; set; }
+
+        [Required]
+        [Display(Name = "Apellidos")]
+        public string Apellidos { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Correo electrónico")]

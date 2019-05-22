@@ -7,13 +7,13 @@ namespace MVeterinaria.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class segu : IMigrationMetadata
+    public sealed partial class ini : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(segu));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(ini));
         
         string IMigrationMetadata.Id
         {
-            get { return "201905200234462_segu"; }
+            get { return "201905212312200_ini"; }
         }
         
         string IMigrationMetadata.Source
