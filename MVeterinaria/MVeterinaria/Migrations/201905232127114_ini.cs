@@ -20,15 +20,16 @@ namespace MVeterinaria.Migrations
                 .PrimaryKey(t => t.AdministradorId);
             
             CreateTable(
-                "dbo.Boletas",
+                "dbo.Citas",
                 c => new
                     {
-                        BoletaId = c.Int(nullable: false, identity: true),
+                        CitaId = c.Int(nullable: false, identity: true),
+                        FechaEmision = c.DateTime(nullable: false),
+                        FechaCita = c.DateTime(nullable: false),
                         MascotaId = c.Int(nullable: false),
-                        FechaEmision = c.String(),
                         VeterinarioId = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => t.BoletaId)
+                .PrimaryKey(t => t.CitaId)
                 .ForeignKey("dbo.Mascotas", t => t.MascotaId, cascadeDelete: true)
                 .ForeignKey("dbo.Veterinarios", t => t.VeterinarioId, cascadeDelete: true)
                 .Index(t => t.MascotaId)
@@ -72,18 +73,6 @@ namespace MVeterinaria.Migrations
                         Telefono = c.String(),
                     })
                 .PrimaryKey(t => t.VeterinarioId);
-            
-            CreateTable(
-                "dbo.Citas",
-                c => new
-                    {
-                        CitaId = c.Int(nullable: false, identity: true),
-                        FechaCita = c.DateTime(nullable: false),
-                        BoletaId = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => t.CitaId)
-                .ForeignKey("dbo.Boletas", t => t.BoletaId, cascadeDelete: true)
-                .Index(t => t.BoletaId);
             
             CreateTable(
                 "dbo.AspNetRoles",
@@ -163,9 +152,8 @@ namespace MVeterinaria.Migrations
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
-            DropForeignKey("dbo.Citas", "BoletaId", "dbo.Boletas");
-            DropForeignKey("dbo.Boletas", "VeterinarioId", "dbo.Veterinarios");
-            DropForeignKey("dbo.Boletas", "MascotaId", "dbo.Mascotas");
+            DropForeignKey("dbo.Citas", "VeterinarioId", "dbo.Veterinarios");
+            DropForeignKey("dbo.Citas", "MascotaId", "dbo.Mascotas");
             DropForeignKey("dbo.Mascotas", "ClienteId", "dbo.Clientes");
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
@@ -173,20 +161,18 @@ namespace MVeterinaria.Migrations
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
-            DropIndex("dbo.Citas", new[] { "BoletaId" });
             DropIndex("dbo.Mascotas", new[] { "ClienteId" });
-            DropIndex("dbo.Boletas", new[] { "VeterinarioId" });
-            DropIndex("dbo.Boletas", new[] { "MascotaId" });
+            DropIndex("dbo.Citas", new[] { "VeterinarioId" });
+            DropIndex("dbo.Citas", new[] { "MascotaId" });
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
-            DropTable("dbo.Citas");
             DropTable("dbo.Veterinarios");
             DropTable("dbo.Clientes");
             DropTable("dbo.Mascotas");
-            DropTable("dbo.Boletas");
+            DropTable("dbo.Citas");
             DropTable("dbo.Administradors");
         }
     }

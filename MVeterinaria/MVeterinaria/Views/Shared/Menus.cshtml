@@ -7,68 +7,72 @@
     .color {
         color: white;
     }
+    .margen{
+        margin-top: 50px;
+    }
 </style>
 <section class="sidebar" id="slidebar">
     <ul class="sidebar-menu">
 
         <li>
             <a class="color" href="@(Url.Action("Index","Home"))">
-                <i class="fa fa-home color fa-2x   "> </i> <span style="font-size:2em " class=" color">      Inicio</span>
+                <i class="fa fa-home color fa-lg   "> </i> <span style="font-size:1.5em " class=" color">      Inicio</span>
             </a>
         </li>
         @* Clientes *@
-        <li class="treeview">
+        <li class="treeview margen">
             <a href="#">
-                <i class=" color fa fa-calendar fa-2x"></i>
-                <span class="color" style="font-size:2em ">      Clientes</span>
+                <i class=" color fa fa-user fa-lg "></i>
+                <span class="color" style="font-size:1.5em ">      Clientes</span>
             </a>
-            <ul class="treeview-menu">
-                <li><a href="@(Url.Action("create","Clientes"))"><i class="color fa fa-calendar-plus-o"></i>Nuevo</a></li>
+            <ul class="treeview-menu margen">
+                <li><a href="@(Url.Action("create","Clientes"))"><i class="color fa fa-user-plus-o"></i>Nuevo</a></li>
             </ul>
             <ul class="treeview-menu">
-                <li><a href="@(Url.Action("Index","Clientes"))"><i class="color fa fa-calendar-plus-o"></i>Listado</a></li>
+                <li><a href="@(Url.Action("Index","Clientes"))"><i class="color fa fa-clipboard-list"></i>Listado</a></li>
             </ul>
 
         </li>
         @* Mascotas *@
-        <li class="treeview">
+        <li class="treeview margen">
             <a href="#">
-                <i class=" color fa fa-calendar fa-2x"></i>
-                <span class="color" style="font-size:2em ">      Mascotas</span>
+                <i class=" color fa fa-paw fa-lg "></i>
+                <span class="color" style="font-size:1.5em ">      Mascotas</span>
             </a>
             <ul class="treeview-menu">
-                <li><a href="@(Url.Action("create","Mascotas"))"><i class="color fa fa-calendar-plus-o"></i>Nuevo</a></li>
+                <li><a href="@(Url.Action("create","Mascotas"))"><i class="color fa fa-plus"></i>Nuevo</a></li>
             </ul>
             <ul class="treeview-menu">
-                <li><a href="@(Url.Action("Index","Mascotas"))"><i class="color fa fa-calendar-plus-o"></i>Listado</a></li>
+                <li><a href="@(Url.Action("Index","Mascotas"))"><i class="color fa fa-paw"></i>Listado</a></li>
             </ul>
 
         </li>
         @* Veterinario *@
-        <li class="treeview">
+        <li class="treeview margen">
             <a href="#">
-                <i class=" color fa fa-calendar fa-2x"></i>
-                <span class="color" style="font-size:2em ">      Veterinarios</span>
+                <i class=" color fa fa-user-md fa-lg"></i>
+                <span class="color" style="font-size:1.5em ">      Veterinarios</span>
             </a>
             <ul class="treeview-menu">
-                <li><a href="@(Url.Action("create","Veterinarios"))"><i class="color fa fa-calendar-plus-o"></i>Nuevo</a></li>
+                <li><a href="@(Url.Action("create","Veterinarios"))"><i class="color fa fa-user-md"></i>Nuevo</a></li>
             </ul>
             <ul class="treeview-menu">
-                <li><a href="@(Url.Action("Index","Veterinarios"))"><i class="color fa fa-calendar-plus-o"></i>Listado</a></li>
+                <li><a href="@(Url.Action("Index","Veterinarios"))"><i class="color fa fa-clipboard-list"></i>Listado</a></li>
             </ul>
 
         </li>
         @* Citas *@
-        <li class="treeview">
+        <li class="treeview margen">
             <a href="#">
-                <i class=" color fa fa-calendar fa-2x"></i>
-                <span class="color" style="font-size:2em ">      Citas</span>
+                <i class=" color fa fa-calendar fa-lg"></i>
+                <span class="color" style="font-size:1.5em ">      Citas</span>
             </a>
             <ul class="treeview-menu">
-                <li><a href="@(Url.Action("create","Boletas"))"><i class="color fa fa-calendar-plus-o"></i>Nueva boleta</a></li>
+                <li><a href="@(Url.Action("create","Citas"))"><i class="color fa fa-notes-medical"></i>Nueva Cita</a></li>
             </ul>
+            
             <ul class="treeview-menu">
-                <li><a href="@(Url.Action("Index","Boletas"))"><i class="color fa fa-calendar-plus-o"></i>Listado</a></li>
+                <li><a href="@(Url.Action("Index","Citas"))"><i class="color fa fa-calendar-plus-o"></i>Listado</a></li>
             </ul>
 
         </li>

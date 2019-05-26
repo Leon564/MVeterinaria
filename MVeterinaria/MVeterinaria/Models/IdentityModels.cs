@@ -39,7 +39,7 @@ namespace MVeterinaria.Models
 
         public System.Data.Entity.DbSet<MVeterinaria.Models.Cita> Citas { get; set; }
 
-        public System.Data.Entity.DbSet<MVeterinaria.Models.Boleta> Boletas { get; set; }
+       
 
         public System.Data.Entity.DbSet<MVeterinaria.Models.Mascota> Mascotas { get; set; }
 

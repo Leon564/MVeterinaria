@@ -12,7 +12,10 @@ namespace MVeterinaria.Models
         public string Raza { get; set; }
         public string Especie { get; set; }
         public string Sexo { get; set; }
+        //public ApplicationUser user { get; set; }
+        //public int userId { get; set; }
         public Cliente Ciente { get; set; }
         public int ClienteId { get; set; }
+        
     }
 }

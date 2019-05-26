@@ -175,7 +175,6 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdministradorsController.cs" />
-    <Compile Include="Controllers\BoletasController.cs" />
     <Compile Include="Controllers\CitasController.cs" />
     <Compile Include="Controllers\ClientesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -185,14 +184,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201905212312200_ini.cs" />
-    <Compile Include="Migrations\201905212312200_ini.Designer.cs">
-      <DependentUpon>201905212312200_ini.cs</DependentUpon>
+    <Compile Include="Migrations\201905232127114_ini.cs" />
+    <Compile Include="Migrations\201905232127114_ini.Designer.cs">
+      <DependentUpon>201905232127114_ini.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Administrador.cs" />
-    <Compile Include="Models\Boleta.cs" />
     <Compile Include="Models\Cita.cs" />
     <Compile Include="Models\Cliente.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -541,11 +539,6 @@
     <Content Include="Views\Mascotas\Details.cshtml" />
     <Content Include="Views\Mascotas\Edit.cshtml" />
     <Content Include="Views\Mascotas\Index.cshtml" />
-    <Content Include="Views\Boletas\Delete.cshtml" />
-    <Content Include="Views\Boletas\Details.cshtml" />
-    <Content Include="Views\Boletas\Edit.cshtml" />
-    <Content Include="Views\Boletas\Index.cshtml" />
-    <Content Include="Views\Boletas\Create.cshtml" />
     <Content Include="Views\Citas\Create.cshtml" />
     <Content Include="Views\Citas\Delete.cshtml" />
     <Content Include="Views\Citas\Details.cshtml" />
@@ -569,8 +562,8 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201905212312200_ini.resx">
-      <DependentUpon>201905212312200_ini.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201905232127114_ini.resx">
+      <DependentUpon>201905232127114_ini.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
