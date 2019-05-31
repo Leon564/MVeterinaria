@@ -19,20 +19,7 @@
                 <i class="fa fa-home color fa-lg   "> </i> <span style="font-size:1.5em " class=" color">      Inicio</span>
             </a>
         </li>
-        @* Clientes *@
-        <li class="treeview margen">
-            <a href="#">
-                <i class=" color fa fa-user fa-lg "></i>
-                <span class="color" style="font-size:1.5em ">      Clientes</span>
-            </a>
-            <ul class="treeview-menu margen">
-                <li><a href="@(Url.Action("create","Clientes"))"><i class="color fa fa-user-plus-o"></i>Nuevo</a></li>
-            </ul>
-            <ul class="treeview-menu">
-                <li><a href="@(Url.Action("Index","Clientes"))"><i class="color fa fa-clipboard-list"></i>Listado</a></li>
-            </ul>
 
-        </li>
         @* Mascotas *@
         <li class="treeview margen">
             <a href="#">
@@ -47,20 +34,7 @@
             </ul>
 
         </li>
-        @* Veterinario *@
-        <li class="treeview margen">
-            <a href="#">
-                <i class=" color fa fa-user-md fa-lg"></i>
-                <span class="color" style="font-size:1.5em ">      Veterinarios</span>
-            </a>
-            <ul class="treeview-menu">
-                <li><a href="@(Url.Action("create","Veterinarios"))"><i class="color fa fa-user-md"></i>Nuevo</a></li>
-            </ul>
-            <ul class="treeview-menu">
-                <li><a href="@(Url.Action("Index","Veterinarios"))"><i class="color fa fa-clipboard-list"></i>Listado</a></li>
-            </ul>
 
-        </li>
         @* Citas *@
         <li class="treeview margen">
             <a href="#">
@@ -70,16 +44,36 @@
             <ul class="treeview-menu">
                 <li><a href="@(Url.Action("create","Citas"))"><i class="color fa fa-notes-medical"></i>Nueva Cita</a></li>
             </ul>
-            
+
             <ul class="treeview-menu">
                 <li><a href="@(Url.Action("Index","Citas"))"><i class="color fa fa-calendar-plus-o"></i>Listado</a></li>
             </ul>
 
         </li>
 
-        @if (User.IsInRole("Role"))
+        @if (User.IsInRole("Admin"))
         {
+            @* Veterinario *@
+            <li class="treeview margen">
+                <a href="#">
+                    <i class=" color fa fa-user-md fa-lg"></i>
+                    <span class="color" style="font-size:1.5em ">      Veterinarios</span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="@(Url.Action("create","Veterinarios"))"><i class="color fa fa-user-md"></i>Nuevo</a></li>
+                </ul>
+                <ul class="treeview-menu">
+                    <li><a href="@(Url.Action("Index","Veterinarios"))"><i class="color fa fa-clipboard-list"></i>Listado</a></li>
+                </ul>
 
+            </li>
+            //Mensajes
+
+            <li>
+                <a class="color" href="@(Url.Action("Email","Citas"))">
+                    <i class="fa fa-home color fa-lg   "> </i> <span style="font-size:1.5em " class=" color">      Mensajes</span>
+                </a>
+            </li>
         }
 
 

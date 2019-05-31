@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -9,13 +11,31 @@ namespace MVeterinaria.Models
     {
         public int MascotaId { get; set; }
         public string Nombre { get; set; }
-        public string Raza { get; set; }
-        public string Especie { get; set; }
-        public string Sexo { get; set; }
-        //public ApplicationUser user { get; set; }
-        //public int userId { get; set; }
-        public Cliente Ciente { get; set; }
-        public int ClienteId { get; set; }
-        
+
+        public Raza Raza { get; set; }
+        public int RazaId { get; set; }
+
+
+        public Sexo Sexo { get; set; }
+        public int SexoId { get; set; }
+
+
+
+
+
+        public virtual string ClientId { get; set; }
+
+        public virtual ApplicationUser Client { get; set; }
+
+
+
+
+
+
+
+
+
+
+
     }
 }

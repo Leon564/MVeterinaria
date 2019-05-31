@@ -1,16 +1,21 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using MVeterinaria.Models;
+
 
 namespace MVeterinaria.Models
 {
     // Para agregar datos de perfil del usuario, agregue más propiedades a su clase ApplicationUser. Visite https://go.microsoft.com/fwlink/?LinkID=317594 para obtener más información.
     public class ApplicationUser : IdentityUser
     {
+       
         public string Nombre { get; set; }
         public string Apellido { get; set; }
+       
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Tenga en cuenta que el valor de authenticationType debe coincidir con el definido en CookieAuthenticationOptions.AuthenticationType
@@ -26,8 +31,8 @@ namespace MVeterinaria.Models
             : base("DBVeterinaria", throwIfV1Schema: false)
         {
         }
-        //DbSet<Veterinario> Veterinarios { get; set; }
-        //DbSet<Cliente> Clientes { get; set; }
+        
+
         //DbSet<Cita> Citas { get; set; }
         //DbSet<Boleta> Boletas { get; set; }
         //DbSet<Administrador> Administradores { get; set; }
@@ -41,12 +46,18 @@ namespace MVeterinaria.Models
 
        
 
-        public System.Data.Entity.DbSet<MVeterinaria.Models.Mascota> Mascotas { get; set; }
+      
 
         public System.Data.Entity.DbSet<MVeterinaria.Models.Veterinario> Veterinarios { get; set; }
 
-        public System.Data.Entity.DbSet<MVeterinaria.Models.Cliente> Clientes { get; set; }
+        
 
-        public System.Data.Entity.DbSet<MVeterinaria.Models.Administrador> Administradors { get; set; }
+        
+
+        public System.Data.Entity.DbSet<MVeterinaria.Models.Mascota> Mascotas { get; set; }
+
+        public System.Data.Entity.DbSet<MVeterinaria.Models.Raza> Razas { get; set; }
+
+        public System.Data.Entity.DbSet<MVeterinaria.Models.Sexo> Sexos{ get; set; }
     }
 }

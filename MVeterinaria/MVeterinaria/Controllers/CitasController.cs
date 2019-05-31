@@ -4,15 +4,15 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using MVeterinaria.Models;
-using System.Net;
-using System.Net.Mail;
-
 
 namespace MVeterinaria.Controllers
 {
+    [Authorize]
     public class CitasController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -20,38 +20,93 @@ namespace MVeterinaria.Controllers
         // GET: Citas
         public ActionResult Index()
         {
-            var citas = db.Citas.Include(c => c.Mascota).Include(c => c.Veterinario);
-            return View(citas.ToList());
+
+            List<Cita> cits = new List<Cita>();
+            var citas = db.Citas;
+            foreach (var item in citas)
+            {
+                DateTime fechaf = Convert.ToDateTime(item.FechaCita);
+                if (fechaf < DateTime.Now.Date)
+                {
+                    item.EstadoCitaId = 2;
+                    
+                }
+
+            }
+            db.SaveChanges();
+            
+            if (User.IsInRole("Admin"))
+            {
+                var citasV = (from x in db.Citas
+                              where x.EstadoCitaId == 1
+                              select x).Include(c => c.Mascota).Include(c => c.Veterinario).Include(c => c.Mascota.Client);
+                return View(citasV);
+            }
+            else
+            {
+                var user = User.Identity.GetUserId().ToString();
+                var citasV = (from x in db.Citas
+                              where x.EstadoCitaId == 1 && x.Mascota.ClientId==user
+                              select x).Include(c => c.Mascota).Include(c => c.Veterinario).Include(c => c.Mascota.Client);
+                return View(citasV);
+            }
+            
         }
+        [Authorize(Roles = "Admin")]
+        //Correos Citas
         public ActionResult Email()
         {
-            var use = (from x in db.Users
-                       select x.Email).ToList();
-            foreach (var item in use)
+            string fecha = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd");
+            string fecha2 = DateTime.Now.AddDays(5).ToString("yyyy-MM-dd");
+
+
+            var Masc = (from x in db.Citas
+                        where x.FechaCita == fecha || x.FechaCita == fecha2
+                        select x).ToList();
+            foreach (var item in Masc)
             {
-                //CORREO
-                MailMessage Correo = new MailMessage();
-                Correo.From = new MailAddress("nleon564@gmail.com");
-                Correo.To.Add(item);
-                Correo.Subject = ("SYSTEM");
-                Correo.Body = "hOLA ";
-                Correo.Priority = MailPriority.Normal;
-                // SMPT
-                SmtpClient ServerMail = new SmtpClient();
-                ServerMail.Credentials = new NetworkCredential("nleon564@gmail.com", "otosaka1");
-                ServerMail.Host = "smtp.gmail.com";
-                ServerMail.Port = 587;
-                ServerMail.EnableSsl = true;
-                try
+                var Clien = (from c in db.Mascotas
+                             where c.MascotaId == item.MascotaId
+                             select c).ToList();
+                foreach (var item2 in Clien)
                 {
-                    ServerMail.Send(Correo);
-                }
-                catch (Exception ex)
-                {
+                    var Em = (from v in db.Users
+                              where v.Id == item2.ClientId
+                              select v).ToList();
+                    foreach (var usuario in Em)
+                    {
+                        MailMessage Correo = new MailMessage();
+                        Correo.From = new MailAddress("happypet.vetsv@gmail.com");
+                        Correo.To.Add(usuario.Email);
+                        Correo.Subject = ("RECORDATORIO CITA");
+                        Correo.Body = "Hola, " + usuario.Nombre + " " + usuario.Apellido + Environment.NewLine + " Se le recuerda que tiene una cita programada de su mascota : " + item2.Nombre + Environment.NewLine + " para la el dia: " + item.FechaCita;
+                        Correo.Priority = MailPriority.Normal;
+                        // SMPT
+                        SmtpClient ServerMail = new SmtpClient();
+                        ServerMail.Credentials = new NetworkCredential("happypet.vetsv@gmail.com", "configuracion1");
+                        ServerMail.Host = "smtp.gmail.com";
+                        ServerMail.Port = 587;
+                        ServerMail.EnableSsl = true;
+                        try
+                        {
+                            ServerMail.Send(Correo);
+                        }
+                        catch (Exception ex)
+                        {
+
+                        }
+                        Correo.Dispose();
+
+                    }
+
 
                 }
-                
+
+
             }
+
+
+
             return RedirectToAction("Index");
         }
 
@@ -63,6 +118,7 @@ namespace MVeterinaria.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Cita cita = db.Citas.Find(id);
+
             if (cita == null)
             {
                 return HttpNotFound();
@@ -73,10 +129,21 @@ namespace MVeterinaria.Controllers
         // GET: Citas/Create
         public ActionResult Create()
         {
-            ViewBag.MascotaId = new SelectList(db.Mascotas, "MascotaId", "Nombre");
-            ViewBag.VeterinarioId = new SelectList(db.Veterinarios, "VeterinarioId", "Nombre");
-            var default_Value = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss").Replace(' ', 'T'); 
-            ViewBag.AAA = default_Value;
+            if (User.IsInRole("Admin"))
+            {
+                ViewBag.MascotaId = new SelectList(db.Mascotas, "MascotaId", "Nombre");
+                ViewBag.VeterinarioId = new SelectList(db.Veterinarios, "VeterinarioId", "Nombre");
+            }
+            else
+            {
+                string id = User.Identity.GetUserId();
+                var masc = (from ar in db.Mascotas
+                            where ar.ClientId == id
+                            select ar);
+                ViewBag.MascotaId = new SelectList(masc, "MascotaId", "Nombre");
+                ViewBag.VeterinarioId = new SelectList(db.Veterinarios, "VeterinarioId", "Nombre");
+            }
+
             return View();
         }
 
@@ -89,9 +156,15 @@ namespace MVeterinaria.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Citas.Add(cita);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+              
+                    cita.FechaEmision = DateTime.Now.ToShortDateString();
+                    cita.EstadoCitaId = 1;
+                    db.Citas.Add(cita);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                
+              
+             
             }
 
             ViewBag.MascotaId = new SelectList(db.Mascotas, "MascotaId", "Nombre", cita.MascotaId);
@@ -111,6 +184,7 @@ namespace MVeterinaria.Controllers
             {
                 return HttpNotFound();
             }
+
             ViewBag.MascotaId = new SelectList(db.Mascotas, "MascotaId", "Nombre", cita.MascotaId);
             ViewBag.VeterinarioId = new SelectList(db.Veterinarios, "VeterinarioId", "Nombre", cita.VeterinarioId);
             return View(cita);

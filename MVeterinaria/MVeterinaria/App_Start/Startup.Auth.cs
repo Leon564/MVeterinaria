@@ -55,8 +55,8 @@ namespace MVeterinaria
             //   consumerSecret: "");
 
             app.UseFacebookAuthentication(
-               appId: "2072040979766389",
-               appSecret: "26bd4a15744dd48a2c6db18b736b239a");
+               appId: "383800138898465",
+               appSecret: "fb85c4720d4a5fe8a85c90ff7e1d1968");
 
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{

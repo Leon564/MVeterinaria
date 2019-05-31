@@ -13,7 +13,7 @@ namespace MVeterinaria.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201905232127114_ini"; }
+            get { return "201905290410255_ini"; }
         }
         
         string IMigrationMetadata.Source

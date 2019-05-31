@@ -1,34 +1,48 @@
 ﻿@model IEnumerable<MVeterinaria.Models.Cita>
 
-@{
-    ViewBag.Title = "Index";
+
+@if (User.IsInRole("Admin"))
+{
+<h2>Citas Registadas "Admin"</h2>
+}
+else
+{
+<h2>Citas Registadas</h2>
 }
 
-<h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
-    @Html.ActionLink("Correo", "Email")
+    @Html.ActionLink("Crear nueva", "Create")
 </p>
-<table class="table">
+<table class="table text-center">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Mascota.Nombre)
+            Nombre de la Mascota
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Veterinario.Nombre)
+            Nombre del Veterinario
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FechaEmision)
+            Fecha de Emision
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FechaCita)
+            Fecha de la Cita
         </th>
+        @if (User.IsInRole("Admin"))
+        {
+            <th>
+               |Datos
+            </th>
+            <th>
+                Dueño
+            </th>
+
+        }
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
+    <tr class="text-center">
         <td>
             @Html.DisplayFor(modelItem => item.Mascota.Nombre)
         </td>
@@ -41,10 +55,21 @@
         <td>
             @Html.DisplayFor(modelItem => item.FechaCita)
         </td>
+        @if (User.IsInRole("Admin"))
+        {
+            <td>
+               | @Html.DisplayFor(modelItem => item.Mascota.Client.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mascota.Client.Apellido)
+            </td>
+
+        }
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.CitaId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.CitaId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.CitaId })
+
+            @Html.ActionLink("Editar", "Edit", new { id = item.CitaId }) |
+
+            @Html.ActionLink("Eliminar", "Delete", new { id = item.CitaId })
         </td>
     </tr>
 }

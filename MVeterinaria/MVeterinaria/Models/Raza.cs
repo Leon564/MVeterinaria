@@ -5,8 +5,13 @@ using System.Web;
 
 namespace MVeterinaria.Models
 {
-    public class Administrador:Persona
+    public class Raza
     {
-        public int AdministradorId { get; set; }
+        public int RazaId { get; set; }
+        public string Nombre { get; set; }
+
+        
+
+    
     }
 }

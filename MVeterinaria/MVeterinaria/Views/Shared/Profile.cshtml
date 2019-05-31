@@ -1,60 +1,78 @@
 ﻿@using Microsoft.AspNet.Identity
+@using MVeterinaria.Models
+
 @if (Request.IsAuthenticated)
 
 {
-<li class="dropdown user user-menu">
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-        <img src="~/images/icono-cliente1.png" class="user-image" alt="User Image">
-        <span class="hidden-xs">@User.Identity.GetUserName()</span>
-    </a>
-   
-    <ul class="dropdown-menu">
-        <!-- User image -->
-        <li class="user-header">
-            <img src="~/images/icono-cliente1.png" class="img-circle" alt="User Image">
-            <p>
-                 @{
-                     var a = User.Identity.GetUserId();
-                     
-
-
-
-                     }
-                @Html.ActionLink(User.Identity.GetUserName() , "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @style = "color:#FFFFFF;" })
-                
-            </p>
-        </li>
-        <!-- Menu Body -->
-        @*<li class="user-body">
-                <div class="row">
-                    <div class="col-xs-4 text-center">
-                        <a href="#">Followers</a>
-                    </div>
-                    <div class="col-xs-4 text-center">
-                        <a href="#">Sales</a>
-                    </div>
-                    <div class="col-xs-4 text-center">
-                        <a href="#">Friends</a>
-                    </div>
-                </div>
-            </li>*@
-        <!-- Menu Footer-->
-        <li class="user-footer">
-            <div class="pull-left">
-                <a href="#" class="btn btn-default btn-flat"><i class="fa fa-user"></i>&nbsp;Perfil</a>
-            </div>
-            <div class="pull-right">
-             
-                @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+    <li class="dropdown user user-menu">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <img src="~/images/icono-cliente1.png" class="user-image" alt="User Image">
+            @{
+                string xd = null;
+                var us = User.Identity.GetUserId();
+                ApplicationDbContext db = new ApplicationDbContext();
+                ApplicationUser user = new ApplicationUser();
+                var users = (from x in db.Users
+                             where x.Id == us
+                             select x).FirstOrDefault();
+                if (users.Nombre != null)
                 {
-                    @Html.AntiForgeryToken()
-                    <button class="btn btn-default btn-flat" href="javascript:document.getElementById('logoutForm').submit()" type="submit"><i class="fa fa-sign-out"></i>&nbsp;Sair</button>
+                    xd = users.Nombre;
                 }
-            </div>
-        </li>
-    </ul>
+                else
+                {
+                    xd = User.Identity.GetUserName();
+                }
 
-</li>
+
+
+            }
+
+            <span class="hidden-xs">@xd</span>
+
+        </a>
+
+        <ul class="dropdown-menu">
+            <!-- User image -->
+            <li class="user-header">
+                <img src="~/images/icono-cliente1.png" class="img-circle" alt="User Image">
+                <p>
+
+                    @Html.ActionLink(User.Identity.GetUserName(), "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @style = "color:#FFFFFF;" })
+
+                </p>
+            </li>
+            <!-- Menu Body -->
+            @*<li class="user-body">
+                    <div class="row">
+                        <div class="col-xs-4 text-center">
+                            <a href="#">Followers</a>
+                        </div>
+                        <div class="col-xs-4 text-center">
+                            <a href="#">Sales</a>
+                        </div>
+                        <div class="col-xs-4 text-center">
+                            <a href="#">Friends</a>
+                        </div>
+                    </div>
+                </li>*@
+            <!-- Menu Footer-->
+            <li class="user-footer">
+                <div class="pull-left">
+                    <a href="#" class="btn btn-default btn-flat"><i class="fa fa-user"></i>&nbsp;Perfil</a>
+                </div>
+                <div class="pull-right">
+
+                    @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <button class="btn btn-default btn-flat" href="javascript:document.getElementById('logoutForm').submit()" type="submit"><i class="fa fa-sign-out"></i>&nbsp;Sair</button>
+                    }
+                </div>
+            </li>
+        </ul>
+
+    </li>
 }
 else
 {
@@ -67,7 +85,7 @@ else
             <!-- User image -->
             <li class="user-header">
                 <img src="~/images/icono-cliente1.png" class="img-circle" alt="User Image">
-                
+
             </li>
             <!-- Menu Body -->
             @*<li class="user-body">
@@ -96,9 +114,9 @@ else
                 <div class="pull-right">
                     @Html.AntiForgeryToken()
                     @using (Html.BeginForm("Register", "Account", new { Area = "" }))
-                    { 
+                    {
                         @Html.AntiForgeryToken()
-                        
+
                         <button class="btn btn-default btn-flat" type="submit" id="registerLink"><i class="fa fa-sign-out"></i>&nbsp;Registrarse</button>
                     }
                 </div>

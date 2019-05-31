@@ -5,8 +5,9 @@ using System.Web;
 
 namespace MVeterinaria.Models
 {
-    public class Cliente:Persona
+    public class Sexo
     {
-        public int ClienteId { get; set; }
+        public int SexoId { get; set; }
+        public string Nombre { get; set; }
     }
 }

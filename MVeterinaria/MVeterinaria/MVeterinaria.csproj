@@ -174,29 +174,41 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\AdministradorsController.cs" />
     <Compile Include="Controllers\CitasController.cs" />
-    <Compile Include="Controllers\ClientesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MascotasController.cs" />
+    <Compile Include="Controllers\RazasController.cs" />
+    <Compile Include="Controllers\SexosController.cs" />
     <Compile Include="Controllers\VeterinariosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201905232127114_ini.cs" />
-    <Compile Include="Migrations\201905232127114_ini.Designer.cs">
-      <DependentUpon>201905232127114_ini.cs</DependentUpon>
+    <Compile Include="Migrations\201905290410255_ini.cs" />
+    <Compile Include="Migrations\201905290410255_ini.Designer.cs">
+      <DependentUpon>201905290410255_ini.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905290416197_ini2.cs" />
+    <Compile Include="Migrations\201905290416197_ini2.Designer.cs">
+      <DependentUpon>201905290416197_ini2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905302106324_citasState.cs" />
+    <Compile Include="Migrations\201905302106324_citasState.Designer.cs">
+      <DependentUpon>201905302106324_citasState.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905302123299_citasState2.cs" />
+    <Compile Include="Migrations\201905302123299_citasState2.Designer.cs">
+      <DependentUpon>201905302123299_citasState2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\Administrador.cs" />
     <Compile Include="Models\Cita.cs" />
-    <Compile Include="Models\Cliente.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Mascota.cs" />
     <Compile Include="Models\Persona.cs" />
+    <Compile Include="Models\Raza.cs" />
+    <Compile Include="Models\Sexo.cs" />
     <Compile Include="Models\Veterinario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -519,21 +531,21 @@
     <Content Include="Views\Shared\Profile.cshtml" />
     <Content Include="Views\Shared\Menus.cshtml" />
     <Content Include="Views\Shared\Erro.cshtml" />
-    <Content Include="Views\Clientes\Create.cshtml" />
-    <Content Include="Views\Clientes\Delete.cshtml" />
-    <Content Include="Views\Clientes\Details.cshtml" />
-    <Content Include="Views\Clientes\Edit.cshtml" />
-    <Content Include="Views\Clientes\Index.cshtml" />
     <Content Include="Views\Veterinarios\Create.cshtml" />
     <Content Include="Views\Veterinarios\Delete.cshtml" />
     <Content Include="Views\Veterinarios\Details.cshtml" />
     <Content Include="Views\Veterinarios\Edit.cshtml" />
     <Content Include="Views\Veterinarios\Index.cshtml" />
-    <Content Include="Views\Administradors\Create.cshtml" />
-    <Content Include="Views\Administradors\Delete.cshtml" />
-    <Content Include="Views\Administradors\Details.cshtml" />
-    <Content Include="Views\Administradors\Edit.cshtml" />
-    <Content Include="Views\Administradors\Index.cshtml" />
+    <Content Include="Views\Razas\Create.cshtml" />
+    <Content Include="Views\Razas\Delete.cshtml" />
+    <Content Include="Views\Razas\Details.cshtml" />
+    <Content Include="Views\Razas\Edit.cshtml" />
+    <Content Include="Views\Razas\Index.cshtml" />
+    <Content Include="Views\Sexos\Create.cshtml" />
+    <Content Include="Views\Sexos\Delete.cshtml" />
+    <Content Include="Views\Sexos\Details.cshtml" />
+    <Content Include="Views\Sexos\Edit.cshtml" />
+    <Content Include="Views\Sexos\Index.cshtml" />
     <Content Include="Views\Mascotas\Create.cshtml" />
     <Content Include="Views\Mascotas\Delete.cshtml" />
     <Content Include="Views\Mascotas\Details.cshtml" />
@@ -562,8 +574,17 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201905232127114_ini.resx">
-      <DependentUpon>201905232127114_ini.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201905290410255_ini.resx">
+      <DependentUpon>201905290410255_ini.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905290416197_ini2.resx">
+      <DependentUpon>201905290416197_ini2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905302106324_citasState.resx">
+      <DependentUpon>201905302106324_citasState.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905302123299_citasState2.resx">
+      <DependentUpon>201905302123299_citasState2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

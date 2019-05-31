@@ -8,10 +8,10 @@ namespace MVeterinaria.Models
     public class Cita
     {
         public int CitaId { get; set; }
-        public DateTime FechaEmision { get; set; }
-        public DateTime FechaCita { get; set; }
+        public string FechaEmision { get; set; }
+        public string FechaCita { get; set; }
 
-        public virtual Mascota Mascota { get; set; }
+        public Mascota Mascota { get; set; }
         public int MascotaId { get; set; }
 
 
@@ -19,5 +19,17 @@ namespace MVeterinaria.Models
         public Veterinario Veterinario { get; set; }
         public int VeterinarioId { get; set; }
 
+        public int EstadoCitaId { get; set; }
+        public EstadoCita EstadoCita { get; set; }
+        
+
+       
+
     }
+    public class EstadoCita
+    {
+        public int EstadoCitaId { get; set; }
+        public string Estado { get; set; }
+    }
+        
 }

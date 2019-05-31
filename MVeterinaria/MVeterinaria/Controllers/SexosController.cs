@@ -10,107 +10,107 @@ using MVeterinaria.Models;
 
 namespace MVeterinaria.Controllers
 {
-    public class ClientesController : Controller
+    public class SexosController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Clientes
+        // GET: Sexos
         public ActionResult Index()
         {
-            return View(db.Clientes.ToList());
+            return View(db.Sexos.ToList());
         }
 
-        // GET: Clientes/Details/5
+        // GET: Sexos/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Cliente cliente = db.Clientes.Find(id);
-            if (cliente == null)
+            Sexo sexo = db.Sexos.Find(id);
+            if (sexo == null)
             {
                 return HttpNotFound();
             }
-            return View(cliente);
+            return View(sexo);
         }
 
-        // GET: Clientes/Create
+        // GET: Sexos/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Clientes/Create
+        // POST: Sexos/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ClienteId,Nombre,Apellido,Direccion,Telefono")] Cliente cliente)
+        public ActionResult Create([Bind(Include = "SexoId,Nombre")] Sexo sexo)
         {
             if (ModelState.IsValid)
             {
-                db.Clientes.Add(cliente);
+                db.Sexos.Add(sexo);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(cliente);
+            return View(sexo);
         }
 
-        // GET: Clientes/Edit/5
+        // GET: Sexos/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Cliente cliente = db.Clientes.Find(id);
-            if (cliente == null)
+            Sexo sexo = db.Sexos.Find(id);
+            if (sexo == null)
             {
                 return HttpNotFound();
             }
-            return View(cliente);
+            return View(sexo);
         }
 
-        // POST: Clientes/Edit/5
+        // POST: Sexos/Edit/5
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ClienteId,Nombre,Apellido,Direccion,Telefono")] Cliente cliente)
+        public ActionResult Edit([Bind(Include = "SexoId,Nombre")] Sexo sexo)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(cliente).State = EntityState.Modified;
+                db.Entry(sexo).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(cliente);
+            return View(sexo);
         }
 
-        // GET: Clientes/Delete/5
+        // GET: Sexos/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Cliente cliente = db.Clientes.Find(id);
-            if (cliente == null)
+            Sexo sexo = db.Sexos.Find(id);
+            if (sexo == null)
             {
                 return HttpNotFound();
             }
-            return View(cliente);
+            return View(sexo);
         }
 
-        // POST: Clientes/Delete/5
+        // POST: Sexos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Cliente cliente = db.Clientes.Find(id);
-            db.Clientes.Remove(cliente);
+            Sexo sexo = db.Sexos.Find(id);
+            db.Sexos.Remove(sexo);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

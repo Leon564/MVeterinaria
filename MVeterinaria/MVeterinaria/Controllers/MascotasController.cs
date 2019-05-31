@@ -6,19 +6,27 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using MVeterinaria.Models;
 
 namespace MVeterinaria.Controllers
 {
+    [Authorize]
     public class MascotasController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-
+        
         // GET: Mascotas
         public ActionResult Index()
         {
-            var mascotas = db.Mascotas.Include(m => m.Ciente);
-            return View(mascotas.ToList());
+            string id = User.Identity.GetUserId();
+            var masc = (from ar in db.Mascotas
+                        where ar.ClientId == id
+                        select ar).Include(m => m.Raza).Include(m => m.Sexo);
+            //return mascotas;
+            return View(masc.ToList());
+            //var mascotas = db.Mascotas.Include(m => m.Raza).Include(m => m.Sexo);
+            //return View(mascotas.ToList());
         }
 
         // GET: Mascotas/Details/5
@@ -39,7 +47,8 @@ namespace MVeterinaria.Controllers
         // GET: Mascotas/Create
         public ActionResult Create()
         {
-            ViewBag.ClienteId = new SelectList(db.Clientes, "ClienteId", "Nombre");
+            ViewBag.RazaId = new SelectList(db.Razas, "RazaId", "Nombre");
+            ViewBag.SexoId = new SelectList(db.Sexos, "SexoId", "Nombre");
             return View();
         }
 
@@ -48,19 +57,20 @@ namespace MVeterinaria.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MascotaId,Nombre,Raza,Especie,Sexo,ClienteId")] Mascota mascota)
+        public ActionResult Create([Bind(Include = "MascotaId,Nombre,RazaId,SexoId")] Mascota mascota)
         {
             if (ModelState.IsValid)
             {
+                mascota.ClientId = User.Identity.GetUserId();
                 db.Mascotas.Add(mascota);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ClienteId = new SelectList(db.Clientes, "ClienteId", "Nombre", mascota.ClienteId);
+            ViewBag.RazaId = new SelectList(db.Razas, "RazaId", "Nombre", mascota.RazaId);
+            ViewBag.SexoId = new SelectList(db.Sexos, "SexoId", "Nombre", mascota.SexoId);
             return View(mascota);
         }
-       
 
         // GET: Mascotas/Edit/5
         public ActionResult Edit(int? id)
@@ -74,7 +84,8 @@ namespace MVeterinaria.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ClienteId = new SelectList(db.Clientes, "ClienteId", "Nombre", mascota.ClienteId);
+            ViewBag.RazaId = new SelectList(db.Razas, "RazaId", "Nombre", mascota.RazaId);
+            ViewBag.SexoId = new SelectList(db.Sexos, "SexoId", "Nombre", mascota.SexoId);
             return View(mascota);
         }
 
@@ -83,15 +94,17 @@ namespace MVeterinaria.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MascotaId,Nombre,Raza,Especie,Sexo,ClienteId")] Mascota mascota)
+        public ActionResult Edit([Bind(Include = "MascotaId,Nombre,RazaId,SexoId")] Mascota mascota)
         {
             if (ModelState.IsValid)
             {
+                mascota.ClientId = User.Identity.GetUserId();
                 db.Entry(mascota).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ClienteId = new SelectList(db.Clientes, "ClienteId", "Nombre", mascota.ClienteId);
+            ViewBag.RazaId = new SelectList(db.Razas, "RazaId", "Nombre", mascota.RazaId);
+            ViewBag.SexoId = new SelectList(db.Sexos, "SexoId", "Nombre", mascota.SexoId);
             return View(mascota);
         }
 

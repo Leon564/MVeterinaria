@@ -10,107 +10,107 @@ using MVeterinaria.Models;
 
 namespace MVeterinaria.Controllers
 {
-    public class AdministradorsController : Controller
+    public class RazasController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Administradors
+        // GET: Razas
         public ActionResult Index()
         {
-            return View(db.Administradors.ToList());
+            return View(db.Razas.ToList());
         }
 
-        // GET: Administradors/Details/5
+        // GET: Razas/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Administrador administrador = db.Administradors.Find(id);
-            if (administrador == null)
+            Raza raza = db.Razas.Find(id);
+            if (raza == null)
             {
                 return HttpNotFound();
             }
-            return View(administrador);
+            return View(raza);
         }
 
-        // GET: Administradors/Create
+        // GET: Razas/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Administradors/Create
+        // POST: Razas/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "AdministradorId,Nombre,Apellido,Direccion,Telefono")] Administrador administrador)
+        public ActionResult Create([Bind(Include = "RazaId,Nombre")] Raza raza)
         {
             if (ModelState.IsValid)
             {
-                db.Administradors.Add(administrador);
+                db.Razas.Add(raza);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(administrador);
+            return View(raza);
         }
 
-        // GET: Administradors/Edit/5
+        // GET: Razas/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Administrador administrador = db.Administradors.Find(id);
-            if (administrador == null)
+            Raza raza = db.Razas.Find(id);
+            if (raza == null)
             {
                 return HttpNotFound();
             }
-            return View(administrador);
+            return View(raza);
         }
 
-        // POST: Administradors/Edit/5
+        // POST: Razas/Edit/5
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "AdministradorId,Nombre,Apellido,Direccion,Telefono")] Administrador administrador)
+        public ActionResult Edit([Bind(Include = "RazaId,Nombre")] Raza raza)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(administrador).State = EntityState.Modified;
+                db.Entry(raza).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(administrador);
+            return View(raza);
         }
 
-        // GET: Administradors/Delete/5
+        // GET: Razas/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Administrador administrador = db.Administradors.Find(id);
-            if (administrador == null)
+            Raza raza = db.Razas.Find(id);
+            if (raza == null)
             {
                 return HttpNotFound();
             }
-            return View(administrador);
+            return View(raza);
         }
 
-        // POST: Administradors/Delete/5
+        // POST: Razas/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Administrador administrador = db.Administradors.Find(id);
-            db.Administradors.Remove(administrador);
+            Raza raza = db.Razas.Find(id);
+            db.Razas.Remove(raza);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
