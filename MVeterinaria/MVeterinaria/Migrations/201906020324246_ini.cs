@@ -16,12 +16,24 @@ namespace MVeterinaria.Migrations
                         FechaCita = c.String(),
                         MascotaId = c.Int(nullable: false),
                         VeterinarioId = c.Int(nullable: false),
+                        EstadoCitaId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.CitaId)
+                .ForeignKey("dbo.EstadoCitas", t => t.EstadoCitaId, cascadeDelete: true)
                 .ForeignKey("dbo.Mascotas", t => t.MascotaId, cascadeDelete: true)
                 .ForeignKey("dbo.Veterinarios", t => t.VeterinarioId, cascadeDelete: true)
                 .Index(t => t.MascotaId)
-                .Index(t => t.VeterinarioId);
+                .Index(t => t.VeterinarioId)
+                .Index(t => t.EstadoCitaId);
+            
+            CreateTable(
+                "dbo.EstadoCitas",
+                c => new
+                    {
+                        EstadoCitaId = c.Int(nullable: false, identity: true),
+                        Estado = c.String(),
+                    })
+                .PrimaryKey(t => t.EstadoCitaId);
             
             CreateTable(
                 "dbo.Mascotas",
@@ -150,6 +162,7 @@ namespace MVeterinaria.Migrations
             DropForeignKey("dbo.Citas", "MascotaId", "dbo.Mascotas");
             DropForeignKey("dbo.Mascotas", "SexoId", "dbo.Sexoes");
             DropForeignKey("dbo.Mascotas", "RazaId", "dbo.Razas");
+            DropForeignKey("dbo.Citas", "EstadoCitaId", "dbo.EstadoCitas");
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
@@ -158,6 +171,7 @@ namespace MVeterinaria.Migrations
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.Mascotas", new[] { "SexoId" });
             DropIndex("dbo.Mascotas", new[] { "RazaId" });
+            DropIndex("dbo.Citas", new[] { "EstadoCitaId" });
             DropIndex("dbo.Citas", new[] { "VeterinarioId" });
             DropIndex("dbo.Citas", new[] { "MascotaId" });
             DropTable("dbo.AspNetUserLogins");
@@ -169,6 +183,7 @@ namespace MVeterinaria.Migrations
             DropTable("dbo.Sexoes");
             DropTable("dbo.Razas");
             DropTable("dbo.Mascotas");
+            DropTable("dbo.EstadoCitas");
             DropTable("dbo.Citas");
         }
     }

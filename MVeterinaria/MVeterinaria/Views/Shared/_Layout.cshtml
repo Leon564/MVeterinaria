@@ -9,6 +9,7 @@
     <script src="~/assets/js/please-wait.min.js"></script>
     <script src="~/assets/js/modernizr.js"></script>
     <script src="~/assets/js/jquery.js"></script>
+    
 
     <style>
         #bar {
@@ -17,7 +18,6 @@
 
         #content {
             background-color: #ffffff;
-            
         }
 
         #logo {
@@ -39,33 +39,33 @@
     <![endif]-->
 
     <SCRIPT LANGUAGE="JavaScript">
-var timerID = null;
-var timerRunning = false;
-function stopclock (){
-if(timerRunning)
-clearTimeout(timerID);
-timerRunning = false;
-}
-function showtime () {
-var now = new Date();
-var hours = now.getHours();
-var minutes = now.getMinutes();
-var seconds = now.getSeconds();
-var timeValue = "" + ((hours >12) ? hours -12 :hours)
+        var timerID = null;
+        var timerRunning = false;
+        function stopclock() {
+            if (timerRunning)
+                clearTimeout(timerID);
+            timerRunning = false;
+        }
+        function showtime() {
+            var now = new Date();
+            var hours = now.getHours();
+            var minutes = now.getMinutes();
+            var seconds = now.getSeconds();
+            var timeValue = "" + ((hours > 12) ? hours - 12 : hours)
 
-if (timeValue == "0") timeValue = 12;
-timeValue += ((minutes < 10) ? ":0" : ":") + minutes
-timeValue += ((seconds < 10) ? ":0" : ":") + seconds
-timeValue += (hours >= 12) ? " P.M" : " A.M"
-document.getElementById('Label1').innerText = timeValue;
+            if (timeValue == "0") timeValue = 12;
+            timeValue += ((minutes < 10) ? ":0" : ":") + minutes
+            timeValue += ((seconds < 10) ? ":0" : ":") + seconds
+            timeValue += (hours >= 12) ? " P.M" : " A.M"
+            document.getElementById('Label1').innerText = timeValue;
 
-timerID = setTimeout("showtime()",1000);
-timerRunning = true;
-}
-function startclock() {
-stopclock();
-showtime();
-}
+            timerID = setTimeout("showtime()", 1000);
+            timerRunning = true;
+        }
+        function startclock() {
+            stopclock();
+            showtime();
+        }
     </SCRIPT>
 </head>
 <!-- ADD THE CLASS fixed TO GET A FIXED HEADER AND SIDEBAR LAYOUT -->
@@ -73,7 +73,7 @@ showtime();
 <body class="hold-transition skin-blue fixed sidebar-mini" onLoad="startclock()">
 
     <!-- Site wrapper -->
-    <div class="wrapper">
+    <div class="wrapper" style="color:white">
         <header class="main-header">
             <!-- Logo -->
             <a href="#" class="logo" id="clogo">
@@ -105,10 +105,10 @@ showtime();
         </aside>
         <!-- =============================================== -->
         <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
+        <div class="content-wrapper" style="background-color:white; color:black">
             <!-- Content Header (Page header) -->
-            <section class="content-header">
-                <h1>
+            <section class="content-header" style="background-color:white">
+                <h1 style="background-color:white">
                     @ViewBag.Title
                     <small>@ViewBag.Subtitle</small>
                 </h1>

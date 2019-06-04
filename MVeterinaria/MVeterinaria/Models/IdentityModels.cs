@@ -59,5 +59,6 @@ namespace MVeterinaria.Models
         public System.Data.Entity.DbSet<MVeterinaria.Models.Raza> Razas { get; set; }
 
         public System.Data.Entity.DbSet<MVeterinaria.Models.Sexo> Sexos{ get; set; }
+        public System.Data.Entity.DbSet<MVeterinaria.Models.EstadoCita> EstadoCitas { get; set; }
     }
 }

@@ -7,13 +7,13 @@ namespace MVeterinaria.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class citasState : IMigrationMetadata
+    public sealed partial class fixmasc : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(citasState));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(fixmasc));
         
         string IMigrationMetadata.Id
         {
-            get { return "201905302106324_citasState"; }
+            get { return "201906020325095_fixmasc"; }
         }
         
         string IMigrationMetadata.Source

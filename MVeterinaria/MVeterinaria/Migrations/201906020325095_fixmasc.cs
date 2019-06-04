@@ -3,7 +3,7 @@ namespace MVeterinaria.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class ini2 : DbMigration
+    public partial class fixmasc : DbMigration
     {
         public override void Up()
         {

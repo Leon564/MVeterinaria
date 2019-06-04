@@ -7,13 +7,13 @@ namespace MVeterinaria.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class ini2 : IMigrationMetadata
+    public sealed partial class citasfix : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(ini2));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(citasfix));
         
         string IMigrationMetadata.Id
         {
-            get { return "201905290416197_ini2"; }
+            get { return "201906021913559_citasfix"; }
         }
         
         string IMigrationMetadata.Source

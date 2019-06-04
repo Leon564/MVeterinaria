@@ -18,7 +18,7 @@
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort />
+    <IISExpressSSLPort>44374</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -184,21 +184,17 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201905290410255_ini.cs" />
-    <Compile Include="Migrations\201905290410255_ini.Designer.cs">
-      <DependentUpon>201905290410255_ini.cs</DependentUpon>
+    <Compile Include="Migrations\201906020324246_ini.cs" />
+    <Compile Include="Migrations\201906020324246_ini.Designer.cs">
+      <DependentUpon>201906020324246_ini.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201905290416197_ini2.cs" />
-    <Compile Include="Migrations\201905290416197_ini2.Designer.cs">
-      <DependentUpon>201905290416197_ini2.cs</DependentUpon>
+    <Compile Include="Migrations\201906020325095_fixmasc.cs" />
+    <Compile Include="Migrations\201906020325095_fixmasc.Designer.cs">
+      <DependentUpon>201906020325095_fixmasc.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201905302106324_citasState.cs" />
-    <Compile Include="Migrations\201905302106324_citasState.Designer.cs">
-      <DependentUpon>201905302106324_citasState.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201905302123299_citasState2.cs" />
-    <Compile Include="Migrations\201905302123299_citasState2.Designer.cs">
-      <DependentUpon>201905302123299_citasState2.cs</DependentUpon>
+    <Compile Include="Migrations\201906021913559_citasfix.cs" />
+    <Compile Include="Migrations\201906021913559_citasfix.Designer.cs">
+      <DependentUpon>201906021913559_citasfix.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -457,7 +453,10 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="images\BOTARGAS.png" />
     <Content Include="images\icono-cliente1.png" />
+    <Content Include="images\logo.png" />
+    <Content Include="images\Sin título.ico" />
     <Content Include="images\Sin título.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -483,6 +482,9 @@
     <Content Include="assets\fonts\fontawesome-webfont.woff" />
     <Content Include="assets\fonts\fontawesome-webfont.ttf" />
     <Content Include="assets\fonts\fontawesome-webfont.eot" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\CustomProfile1.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -494,7 +496,14 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Web.config" />
+    <Content Include="Sin título.ico" />
+    <Content Include="source\estilos.css" />
+    <Content Include="source\fonts.css" />
+    <Content Include="source\jquery.slides.js" />
+    <Content Include="source\jquery.slides.min.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -556,6 +565,7 @@
     <Content Include="Views\Citas\Details.cshtml" />
     <Content Include="Views\Citas\Edit.cshtml" />
     <Content Include="Views\Citas\Index.cshtml" />
+    <Content Include="source\jquery.slides.coffee" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -574,22 +584,22 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201905290410255_ini.resx">
-      <DependentUpon>201905290410255_ini.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201906020324246_ini.resx">
+      <DependentUpon>201906020324246_ini.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905290416197_ini2.resx">
-      <DependentUpon>201905290416197_ini2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201906020325095_fixmasc.resx">
+      <DependentUpon>201906020325095_fixmasc.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905302106324_citasState.resx">
-      <DependentUpon>201905302106324_citasState.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905302123299_citasState2.resx">
-      <DependentUpon>201905302123299_citasState2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201906021913559_citasfix.resx">
+      <DependentUpon>201906021913559_citasfix.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Sin título.ico</ApplicationIcon>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
