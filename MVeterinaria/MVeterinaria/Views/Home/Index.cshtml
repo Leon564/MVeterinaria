@@ -17,7 +17,7 @@
         var ver = (from x in db.veterinarios
                    where x.UsId == us
                    select x).Count();
-        if (ver<1)
+        if (ver < 1)
         {
             veterinario.UsId = us;
             db.veterinarios.Add(veterinario);
@@ -74,6 +74,9 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Mascota.Nombre)
                 </td>
+                <td>
+                    @Html.DisplayFor(ModelItem => item.Vet.Nombre)
+                </td>
 
                 <td>
                     @Html.DisplayFor(modelItem => item.FechaEmision)
@@ -105,8 +108,9 @@
 }
 else
 {
-   <div>
-       <h1>xd</h1>
-   </div>
+    <div style="background-image:url(../../images/luzazul.jpeg)">
+
+
+    </div>
 
 }

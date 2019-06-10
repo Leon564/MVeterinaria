@@ -252,6 +252,7 @@
     <Content Include="assets\css\AdminLTE.min.css" />
     <Content Include="assets\css\bootstrap.min.css" />
     <Content Include="assets\css\font-awesome.min.css" />
+    <Content Include="assets\css\BotonPersonalizado.css" />
     <Content Include="assets\css\Fontes.css" />
     <Content Include="assets\css\please-wait.css" />
     <Content Include="assets\css\skin-blue.min.css" />

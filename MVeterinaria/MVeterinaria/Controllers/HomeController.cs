@@ -18,6 +18,44 @@ namespace MVeterinaria.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
         public ActionResult Index()
         {
+            //List<Cita> cits = new List<Cita>();
+            //var citas = db.Citas;
+            //foreach (var item in citas)
+            //{
+            //    DateTime fechaf = Convert.ToDateTime(item.FechaCita);
+            //    if (fechaf < DateTime.Now.Date)
+            //    {
+            //        item.EstadoCitaId = 2;
+
+            //    }
+
+            //}
+            //db.SaveChanges();
+            //if (Request.IsAuthenticated)
+            //{
+            //    if (User.IsInRole("Admin"))
+            //    {
+            //        var citasV = (from x in db.Citas
+            //                      where x.EstadoCitaId == 1
+            //                      select x).Include(c => c.Mascota).Include(c => c.Mascota.Client);
+            //        return View(citasV);
+            //    }
+
+            //    else
+            //    {
+            //        var user = User.Identity.GetUserId().ToString();
+            //        var citasV = (from x in db.Citas
+            //                      where x.EstadoCitaId == 1 && x.Mascota.ClientId == user
+            //                      select x).Include(c => c.Mascota).Include(c => c.Mascota.Client);
+            //        return View(citasV);
+            //    }
+
+            //}
+            //else
+            //{
+            //    return View();
+            //}
+
             List<Cita> cits = new List<Cita>();
             var citas = db.Citas;
             foreach (var item in citas)
@@ -37,7 +75,7 @@ namespace MVeterinaria.Controllers
                 {
                     var citasV = (from x in db.Citas
                                   where x.EstadoCitaId == 1
-                                  select x).Include(c => c.Mascota).Include(c => c.Mascota.Client);
+                                  select x).Include(c => c.Mascota).Include(c => c.Mascota.Client).Include(c => c.Vet);
                     return View(citasV);
                 }
 
@@ -46,7 +84,7 @@ namespace MVeterinaria.Controllers
                     var user = User.Identity.GetUserId().ToString();
                     var citasV = (from x in db.Citas
                                   where x.EstadoCitaId == 1 && x.Mascota.ClientId == user
-                                  select x).Include(c => c.Mascota).Include(c => c.Mascota.Client);
+                                  select x).Include(c => c.Mascota).Include(c => c.Mascota.Client).Include(c => c.Vet);
                     return View(citasV);
                 }
 
@@ -55,6 +93,7 @@ namespace MVeterinaria.Controllers
             {
                 return View();
             }
+
 
         }
 

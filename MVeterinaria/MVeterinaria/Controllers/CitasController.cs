@@ -40,7 +40,7 @@ namespace MVeterinaria.Controllers
                 {
                     var citasV = (from x in db.Citas
                                   where x.EstadoCitaId == 1
-                                  select x).Include(c => c.Mascota).Include(c => c.Mascota.Client);
+                                  select x).Include(c => c.Mascota).Include(c => c.Mascota.Client).Include(c=>c.Vet);
                     return View(citasV);
                 }
 
@@ -49,7 +49,7 @@ namespace MVeterinaria.Controllers
                     var user = User.Identity.GetUserId().ToString();
                     var citasV = (from x in db.Citas
                                   where x.EstadoCitaId == 1 && x.Mascota.ClientId == user
-                                  select x).Include(c => c.Mascota).Include(c => c.Mascota.Client);
+                                  select x).Include(c => c.Mascota).Include(c => c.Mascota.Client).Include(c => c.Vet);
                     return View(citasV);
                 }
                 
@@ -200,36 +200,32 @@ namespace MVeterinaria.Controllers
             
             if (ModelState.IsValid)
             {
-                var result = new List<UserGrid>();
+                var result = new List<string>();
                 using (var ctx = new ApplicationDbContext())
 
                 {
 
 
-                    var xd = ctx.Users.ToList();
-                    int c = xd.Count();
+                    var xd = (from x in ctx.veterinarios
+                             
+                              select x).ToList();
+
+                    foreach (var item in xd)
+                    {
+                       result.Add(item.UsId);
+
+                    }
+                    
 
 
 
 
                 }
 
-                //var p = db.userRols.Count();
-                //var user = db.Users.ToList();
-                //foreach (var u in user)
-                //{
-                //    var usrol = (from x in db.userRols
-                //                 where x.RoleId == "Vet" && x.UserId == u.Id
-                //                 select u.Id).ToList();
-                //    foreach (var item in usrol)
-                //    {
-                //        us.Add(item);
-                //    }
-                //}
-                //Random r1 = new Random();
-                //var sel = r1.Next(0, us.Count-1);
+                Random r1 = new Random();
+                var sel = r1.Next(0, result.Count - 1);
 
-                //cita.VetId = us[sel];  
+                cita.VetId = result[sel];
                 cita.FechaEmision = DateTime.Now.ToShortDateString();
                     cita.EstadoCitaId = 1;
                     db.Citas.Add(cita);

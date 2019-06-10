@@ -54,14 +54,18 @@
             </div>
         </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="boton_personalizado" />
-
-                @*@Html.ActionLink("Regresar", "Index")*@
-                <a class="boton_personalizado" href="~/Boletas/Index">Regresar</a>
+        <div class="form-group dl-horizontal">
+            <div class="col-md-offset-2 col-md-10 form-horizontal">
                 
+
+                <input  type="submit" value="Create" class="btn  boton_personalizado" />
+                @*@Html.ActionLink("Regresar", "Index")*@
+                @*<a class="boton_personalizado" type="submit" href="" >guardar</a>*@
+                <a class="boton_personalizado btn " href="~/Boletas/Index">Regresar</a>
+
+
             </div>
+            
         </div>
     </div>
     <style type="text/css">
@@ -73,14 +77,20 @@
             font-size: 20px;
             color: #ffffff;
             background-color: #0094ff;
+            margin-left: 20px;
             height: 45px;
-            width:96.05px
+            width: 96.05px;
+            text-align:center;
+            
         }
 
-        .boton_personalizado:hover {
-            color: #1883ba;
-            background-color: #ffffff;
-        }
+            .boton_personalizado:hover {
+                color: #ffffff;
+                background-color: #1883ba;
+                margin-left: 20px;
+                height: 45px;
+                width: 96.05px
+            }
     </style>
     
 }

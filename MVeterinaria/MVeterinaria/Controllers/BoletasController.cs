@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MVeterinaria.Models;
+using Microsoft.AspNet.Identity;
 
 namespace MVeterinaria.Controllers
 {
@@ -39,7 +40,13 @@ namespace MVeterinaria.Controllers
         // GET: Boletas/Create
         public ActionResult Create()
         {
-            ViewBag.CitaId = new SelectList(db.Citas, "CitaId", "FechaEmision");
+            string us = User.Identity.GetUserId();
+            var lista = (from x in db.Citas
+                         where x.EstadoCitaId==1 && x.VetId==us
+
+                         select x).Include(x => x.Mascota);
+            ViewBag.CitaId = new SelectList(lista, "CitaId", "Mascota.Nombre");
+            //ViewBag.CitaId = new SelectList(db.Citas, "CitaId", "FechaEmision");
             return View();
         }
 
@@ -52,12 +59,22 @@ namespace MVeterinaria.Controllers
         {
             if (ModelState.IsValid)
             {
+                Cita cita = new Cita();
+                var cits = (from x in db.Citas
+                            where x.CitaId == boleta.CitaId
+                            select x);
+                foreach (var item in cits)
+                {
+                    item.EstadoCitaId = 2;
+                    
+                }
                 db.Boletas.Add(boleta);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-            ViewBag.CitaId = new SelectList(db.Citas, "CitaId", "FechaEmision", boleta.CitaId);
+            var lista = (from x in db.Citas
+                         select x).Include(x => x.Mascota);
+            ViewBag.CitaId = new SelectList(lista, "CitaId", "Mascota.Nombre", boleta.CitaId);
             return View(boleta);
         }
 
