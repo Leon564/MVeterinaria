@@ -1,0 +1,6 @@
+.btn {
+    border-radius: 47px 47px 47px 47px;
+    -moz-border-radius: 47px 47px 47px 47px;
+    -webkit-border-radius: 47px 47px 47px 47px;
+    border: 1px solid #000000;
+}

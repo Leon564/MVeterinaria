@@ -1,10 +1,11 @@
 ﻿@using Microsoft.AspNet.Identity
 @using MVeterinaria.Models
 
+
 @if (Request.IsAuthenticated)
 
 {
-    <li class="dropdown user user-menu" >
+    <li class="dropdown user user-menu">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <img src="~/images/icono-cliente1.png" class="user-image" alt="User Image">
             @{
@@ -34,7 +35,7 @@
 
         <ul class="dropdown-menu">
             <!-- User image -->
-            <li class="user-header"style="background-color:#0026ff">
+            <li class="user-header" style="background-color:#0026ff">
                 <img src="~/images/icono-cliente1.png" class="img-circle" alt="User Image">
                 <p>
 
@@ -66,7 +67,7 @@
                     @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
                     {
                         @Html.AntiForgeryToken()
-                        <button class="btn btn-default btn-flat" href="javascript:document.getElementById('logoutForm').submit()" type="submit"><i class="fa fa-sign-out"></i>&nbsp;Sair</button>
+                        <button class="btn btn-default btn-flat boton" href="javascript:document.getElementById('logoutForm').submit()" type="submit"><i class="fa fa-sign-out"></i>&nbsp;Salir</button>
                     }
                 </div>
             </li>
@@ -83,7 +84,7 @@ else
         </a>
         <ul class="dropdown-menu">
             <!-- User image -->
-            <li class="user-header"style="background-color:#0026ff">
+            <li class="user-header" style="background-color:#0026ff">
                 <img src="~/images/icono-cliente1.png" class="img-circle" alt="User Image">
 
             </li>
@@ -103,12 +104,13 @@ else
                 </li>*@
             <!-- Menu Footer-->
             <li class="user-footer">
+
                 <div class="pull-left">
                     @Html.AntiForgeryToken()
                     @using (Html.BeginForm("Login", "Account", new { Area = "" }))
                     {
                         @Html.AntiForgeryToken()
-                        <button class="btn btn-default btn-flat" type="submit" id="loginLink"><i class="fa fa-sign-out"></i>&nbsp;Iniciar sesión</button>
+                        <button class=" btn btn-default btn-flat boton" type="submit" id="loginLink"><i class="fa fa-sign-out"></i>&nbsp;Iniciar sesión</button>
                     }
                 </div>
                 <div class="pull-right">
@@ -117,8 +119,9 @@ else
                     {
                         @Html.AntiForgeryToken()
 
-                        <button class="btn btn-default btn-flat" type="submit" id="registerLink"><i class="fa fa-sign-out"></i>&nbsp;Registrarse</button>
+                        <button class="btn btn-default btn-flat" st type="submit" id="registerLink"><i class="fa fa-sign-out"></i>&nbsp;Registrarse</button>
                     }
+
                 </div>
             </li>
         </ul>

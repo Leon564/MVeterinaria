@@ -151,11 +151,16 @@ namespace MVeterinaria.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Nombre=model.Nombre,Apellido=model.Apellidos };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Nombre = model.Nombre, Apellido = model.Apellidos};
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                  
+
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                    var currentUser = UserManager.FindByName(user.UserName);
+
+                    var roleresult = UserManager.AddToRole(currentUser.Id, "User");
 
                     // Para obtener más información sobre cómo habilitar la confirmación de cuentas y el restablecimiento de contraseña, visite https://go.microsoft.com/fwlink/?LinkID=320771
                     // Enviar correo electrónico con este vínculo

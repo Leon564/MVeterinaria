@@ -15,6 +15,8 @@ namespace MVeterinaria.Models
        
         public string Nombre { get; set; }
         public string Apellido { get; set; }
+
+        public string Vet { get; set; }
        
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
@@ -46,11 +48,11 @@ namespace MVeterinaria.Models
 
        
 
-      
+      public DbSet<ApplicationUserRol> userRols { get; set; }
 
-        public System.Data.Entity.DbSet<MVeterinaria.Models.Veterinario> Veterinarios { get; set; }
+       
 
-        
+        public DbSet<veterinario> veterinarios { get; set; }
 
         
 
@@ -60,5 +62,7 @@ namespace MVeterinaria.Models
 
         public System.Data.Entity.DbSet<MVeterinaria.Models.Sexo> Sexos{ get; set; }
         public System.Data.Entity.DbSet<MVeterinaria.Models.EstadoCita> EstadoCitas { get; set; }
+
+        public System.Data.Entity.DbSet<MVeterinaria.Models.Boleta> Boletas { get; set; }
     }
 }

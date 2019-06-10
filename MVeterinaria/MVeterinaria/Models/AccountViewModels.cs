@@ -73,6 +73,10 @@ namespace MVeterinaria.Models
         [Display(Name = "Apellidos")]
         public string Apellidos { get; set; }
 
+        
+        [Display(Name = "Apellidos")]
+        public string Vet { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Correo electrónico")]

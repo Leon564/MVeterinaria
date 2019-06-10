@@ -15,15 +15,16 @@ namespace MVeterinaria.Models
         public int MascotaId { get; set; }
 
 
-        
-        public Veterinario Veterinario { get; set; }
-        public int VeterinarioId { get; set; }
+
+       
 
         public int EstadoCitaId { get; set; }
         public EstadoCita EstadoCita { get; set; }
-        
 
-       
+        public virtual string VetId { get; set; }
+
+        public virtual ApplicationUser Vet { get; set; }
+
 
     }
     public class EstadoCita

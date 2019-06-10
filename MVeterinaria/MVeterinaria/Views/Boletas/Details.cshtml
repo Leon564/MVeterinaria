@@ -1,0 +1,50 @@
+﻿@model MVeterinaria.Models.Boleta
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Boleta</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Cita.FechaEmision)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cita.FechaEmision)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Diagnostico)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Diagnostico)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Comentarios)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Comentarios)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Costo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Costo)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.BoletaId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

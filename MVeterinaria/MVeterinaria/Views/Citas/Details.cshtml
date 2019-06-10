@@ -1,10 +1,10 @@
 ﻿@model MVeterinaria.Models.Cita
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalles";
 }
 
-<h2>Details</h2>
+
 
 <div>
     <h4>Cita</h4>
@@ -18,13 +18,7 @@
             @Html.DisplayFor(model => model.Mascota.Nombre)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Veterinario.Nombre)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Veterinario.Nombre)
-        </dd>
+       
 
         <dt>
             @Html.DisplayNameFor(model => model.FechaEmision)
@@ -45,6 +39,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.CitaId }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Editar", "Edit", new { id = Model.CitaId }) |
+    @Html.ActionLink("Regresar", "Index")
 </p>

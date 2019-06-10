@@ -1,4 +1,5 @@
-﻿<style>
+﻿
+<style>
     #slidebar {
         background-color: #0026ff;
         color: white;
@@ -21,7 +22,6 @@
                 <i class="fa fa-home color fa-lg   "> </i> <span style="font-size:1.5em " class=" color">      Inicio</span>
             </a>
         </li>
-
         @* Mascotas *@
         <li class="treeview margen">
             <a href="#">
@@ -52,6 +52,47 @@
             </ul>
 
         </li>
+        @*@if (User.IsInRole("User , Vet"))
+        {*@
+
+
+        @*if (User.IsInRole("Vet"))
+            {
+
+                <li>
+                    <a class="color" href="@(Url.Action("Login","Account"))">
+                        <i class="fa fa-User color fa-lg   "> </i> <span style="font-size:1.5em " class=" color">      Iniciar Sesion</span>
+                    </a>
+                </li>
+            }
+        }
+        else
+        {
+            <li>
+                <a class="color" href="@(Url.Action("Login","Account"))">
+                    <i class="fa fa-User color fa-lg   "> </i> <span style="font-size:1.5em " class=" color">      Iniciar Sesion</span>
+                </a>
+            </li>
+        }*@
+
+        @if (User.IsInRole("Vet"))
+                {
+            //boletas
+            <li class="treeview margen">
+                <a href="#">
+                    <i class="fas fa-book-medical fa-lg"></i>
+                    <span class="color" style="font-size:1.5em ">      Boletas</span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="@(Url.Action("create","Boletas"))"><i class="color fa fa-user-md"></i>Nuevo</a></li>
+                </ul>
+                <ul class="treeview-menu">
+                    <li><a href="@(Url.Action("Index","Boletas"))"><i class="color fa fa-clipboard-list"></i>Listado</a></li>
+                </ul>
+
+            </li>
+        }
+
 
         @if (User.IsInRole("Admin"))
         {

@@ -12,7 +12,7 @@ using MVeterinaria.Models;
 
 namespace MVeterinaria.Controllers
 {
-    [Authorize]
+    
     public class CitasController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -34,22 +34,31 @@ namespace MVeterinaria.Controllers
 
             }
             db.SaveChanges();
-            
-            if (User.IsInRole("Admin"))
+            if (Request.IsAuthenticated)
             {
-                var citasV = (from x in db.Citas
-                              where x.EstadoCitaId == 1
-                              select x).Include(c => c.Mascota).Include(c => c.Veterinario).Include(c => c.Mascota.Client);
-                return View(citasV);
+                if (User.IsInRole("Admin"))
+                {
+                    var citasV = (from x in db.Citas
+                                  where x.EstadoCitaId == 1
+                                  select x).Include(c => c.Mascota).Include(c => c.Mascota.Client);
+                    return View(citasV);
+                }
+
+                else
+                {
+                    var user = User.Identity.GetUserId().ToString();
+                    var citasV = (from x in db.Citas
+                                  where x.EstadoCitaId == 1 && x.Mascota.ClientId == user
+                                  select x).Include(c => c.Mascota).Include(c => c.Mascota.Client);
+                    return View(citasV);
+                }
+                
             }
             else
             {
-                var user = User.Identity.GetUserId().ToString();
-                var citasV = (from x in db.Citas
-                              where x.EstadoCitaId == 1 && x.Mascota.ClientId==user
-                              select x).Include(c => c.Mascota).Include(c => c.Veterinario).Include(c => c.Mascota.Client);
-                return View(citasV);
+                return View();
             }
+
             
         }
         [Authorize(Roles = "Admin")]
@@ -109,6 +118,40 @@ namespace MVeterinaria.Controllers
 
             return RedirectToAction("Index");
         }
+        [Authorize(Roles ="Vet")]
+        public ActionResult CitasVet()
+        {
+            List<Cita> cits = new List<Cita>();
+            var citas = db.Citas;
+            foreach (var item in citas)
+            {
+                DateTime fechaf = Convert.ToDateTime(item.FechaCita);
+                if (fechaf < DateTime.Now.Date)
+                {
+                    item.EstadoCitaId = 2;
+
+                }
+
+            }
+            db.SaveChanges();
+
+            if (User.IsInRole("Admin"))
+            {
+                var citasV = (from x in db.Citas
+                              where x.EstadoCitaId == 1
+                              select x).Include(c => c.Mascota).Include(c => c.Mascota.Client);
+                return View(citasV);
+            }
+            else
+            {
+                var user = User.Identity.GetUserId().ToString();
+                var citasV = (from x in db.Citas
+                              where x.EstadoCitaId == 1 && x.Mascota.ClientId == user
+                              select x).Include(c => c.Mascota).Include(c => c.Mascota.Client);
+                return View(citasV);
+            }
+
+        }
 
         // GET: Citas/Details/5
         public ActionResult Details(int? id)
@@ -132,7 +175,7 @@ namespace MVeterinaria.Controllers
             if (User.IsInRole("Admin"))
             {
                 ViewBag.MascotaId = new SelectList(db.Mascotas, "MascotaId", "Nombre");
-                ViewBag.VeterinarioId = new SelectList(db.Veterinarios, "VeterinarioId", "Nombre");
+                
             }
             else
             {
@@ -141,7 +184,7 @@ namespace MVeterinaria.Controllers
                             where ar.ClientId == id
                             select ar);
                 ViewBag.MascotaId = new SelectList(masc, "MascotaId", "Nombre");
-                ViewBag.VeterinarioId = new SelectList(db.Veterinarios, "VeterinarioId", "Nombre");
+               
             }
 
             return View();
@@ -152,12 +195,42 @@ namespace MVeterinaria.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CitaId,FechaEmision,FechaCita,MascotaId,VeterinarioId")] Cita cita)
-        {
+        public ActionResult Create([Bind(Include = "CitaId,FechaEmision,FechaCita,MascotaId")] Cita cita)
+        {  
+            
             if (ModelState.IsValid)
             {
-              
-                    cita.FechaEmision = DateTime.Now.ToShortDateString();
+                var result = new List<UserGrid>();
+                using (var ctx = new ApplicationDbContext())
+
+                {
+
+
+                    var xd = ctx.Users.ToList();
+                    int c = xd.Count();
+
+
+
+
+                }
+
+                //var p = db.userRols.Count();
+                //var user = db.Users.ToList();
+                //foreach (var u in user)
+                //{
+                //    var usrol = (from x in db.userRols
+                //                 where x.RoleId == "Vet" && x.UserId == u.Id
+                //                 select u.Id).ToList();
+                //    foreach (var item in usrol)
+                //    {
+                //        us.Add(item);
+                //    }
+                //}
+                //Random r1 = new Random();
+                //var sel = r1.Next(0, us.Count-1);
+
+                //cita.VetId = us[sel];  
+                cita.FechaEmision = DateTime.Now.ToShortDateString();
                     cita.EstadoCitaId = 1;
                     db.Citas.Add(cita);
                     db.SaveChanges();
@@ -168,7 +241,7 @@ namespace MVeterinaria.Controllers
             }
 
             ViewBag.MascotaId = new SelectList(db.Mascotas, "MascotaId", "Nombre", cita.MascotaId);
-            ViewBag.VeterinarioId = new SelectList(db.Veterinarios, "VeterinarioId", "Nombre", cita.VeterinarioId);
+            
             return View(cita);
         }
 
@@ -186,7 +259,7 @@ namespace MVeterinaria.Controllers
             }
 
             ViewBag.MascotaId = new SelectList(db.Mascotas, "MascotaId", "Nombre", cita.MascotaId);
-            ViewBag.VeterinarioId = new SelectList(db.Veterinarios, "VeterinarioId", "Nombre", cita.VeterinarioId);
+          
             return View(cita);
         }
 
@@ -204,7 +277,7 @@ namespace MVeterinaria.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.MascotaId = new SelectList(db.Mascotas, "MascotaId", "Nombre", cita.MascotaId);
-            ViewBag.VeterinarioId = new SelectList(db.Veterinarios, "VeterinarioId", "Nombre", cita.VeterinarioId);
+          
             return View(cita);
         }
 

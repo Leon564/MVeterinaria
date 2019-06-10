@@ -1,77 +1,113 @@
 ﻿@model IEnumerable<MVeterinaria.Models.Cita>
 
+@using Microsoft.AspNet.Identity
+@using MVeterinaria.Models
 
-@if (User.IsInRole("Admin"))
+@if (Request.IsAuthenticated)
 {
-<h2>Citas Registadas "Admin"</h2>
+    if (User.IsInRole("Vet"))
+    {
+        veterinario veterinario = new veterinario();
+
+
+        var us = User.Identity.GetUserId();
+        ApplicationDbContext db = new ApplicationDbContext();
+        ApplicationUser user = new ApplicationUser();
+
+        var ver = (from x in db.veterinarios
+                   where x.UsId == us
+                   select x).Count();
+        if (ver<1)
+        {
+            veterinario.UsId = us;
+            db.veterinarios.Add(veterinario);
+            db.SaveChanges();
+        }
+
+
+
+
+    }
+    if (User.IsInRole("Admin"))
+    {
+        <h2>Citas Registadas "Admin"</h2>
+    }
+    else
+    {
+        <h2>Citas Registadas</h2>
+    }
+
+
+    <p>
+        @Html.ActionLink("Crear nueva", "Create")
+    </p>
+    <table class="table text-center">
+        <tr>
+            <th>
+                Nombre de la Mascota
+            </th>
+            <th>
+                Nombre del Veterinario
+            </th>
+            <th>
+                Fecha de Emision
+            </th>
+            <th>
+                Fecha de la Cita
+            </th>
+            @if (User.IsInRole("Admin"))
+            {
+                <th>
+                    |Datos
+                </th>
+                <th>
+                    Dueño
+                </th>
+
+            }
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr class="text-center">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Mascota.Nombre)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaEmision)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaCita)
+                </td>
+                @if (User.IsInRole("Admin"))
+                {
+                    <td>
+                        | @Html.DisplayFor(modelItem => item.Mascota.Client.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Mascota.Client.Apellido)
+                    </td>
+
+                }
+                <td>
+
+                    @Html.ActionLink("Editar", "Edit", new { id = item.CitaId }) |
+
+                    @Html.ActionLink("Eliminar", "Delete", new { id = item.CitaId })
+                </td>
+            </tr>
+        }
+
+    </table>
+
 }
 else
 {
-<h2>Citas Registadas</h2>
+   <div style="background-image:url(../../images/luzazul.jpeg)">
+
+
+   </div>
+
 }
-
-
-<p>
-    @Html.ActionLink("Crear nueva", "Create")
-</p>
-<table class="table text-center">
-    <tr>
-        <th>
-            Nombre de la Mascota
-        </th>
-        <th>
-            Nombre del Veterinario
-        </th>
-        <th>
-            Fecha de Emision
-        </th>
-        <th>
-            Fecha de la Cita
-        </th>
-        @if (User.IsInRole("Admin"))
-        {
-            <th>
-               |Datos
-            </th>
-            <th>
-                Dueño
-            </th>
-
-        }
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr class="text-center">
-        <td>
-            @Html.DisplayFor(modelItem => item.Mascota.Nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Veterinario.Nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FechaEmision)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FechaCita)
-        </td>
-        @if (User.IsInRole("Admin"))
-        {
-            <td>
-               | @Html.DisplayFor(modelItem => item.Mascota.Client.Nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Mascota.Client.Apellido)
-            </td>
-
-        }
-        <td>
-
-            @Html.ActionLink("Editar", "Edit", new { id = item.CitaId }) |
-
-            @Html.ActionLink("Eliminar", "Delete", new { id = item.CitaId })
-        </td>
-    </tr>
-}
-
-</table>

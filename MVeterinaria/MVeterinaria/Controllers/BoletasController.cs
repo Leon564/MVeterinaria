@@ -10,107 +10,112 @@ using MVeterinaria.Models;
 
 namespace MVeterinaria.Controllers
 {
-    public class VeterinariosController : Controller
+    public class BoletasController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Veterinarios
+        // GET: Boletas
         public ActionResult Index()
         {
-            return View(db.Veterinarios.ToList());
+            var boletas = db.Boletas.Include(b => b.Cita);
+            return View(boletas.ToList());
         }
 
-        // GET: Veterinarios/Details/5
+        // GET: Boletas/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Veterinario veterinario = db.Veterinarios.Find(id);
-            if (veterinario == null)
+            Boleta boleta = db.Boletas.Find(id);
+            if (boleta == null)
             {
                 return HttpNotFound();
             }
-            return View(veterinario);
+            return View(boleta);
         }
 
-        // GET: Veterinarios/Create
+        // GET: Boletas/Create
         public ActionResult Create()
         {
+            ViewBag.CitaId = new SelectList(db.Citas, "CitaId", "FechaEmision");
             return View();
         }
 
-        // POST: Veterinarios/Create
+        // POST: Boletas/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "VeterinarioId,Nombre,Apellido,Direccion,Telefono")] Veterinario veterinario)
+        public ActionResult Create([Bind(Include = "BoletaId,CitaId,Diagnostico,Comentarios,Costo")] Boleta boleta)
         {
             if (ModelState.IsValid)
             {
-                db.Veterinarios.Add(veterinario);
+                db.Boletas.Add(boleta);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(veterinario);
+            ViewBag.CitaId = new SelectList(db.Citas, "CitaId", "FechaEmision", boleta.CitaId);
+            return View(boleta);
         }
 
-        // GET: Veterinarios/Edit/5
+        // GET: Boletas/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Veterinario veterinario = db.Veterinarios.Find(id);
-            if (veterinario == null)
+            Boleta boleta = db.Boletas.Find(id);
+            if (boleta == null)
             {
                 return HttpNotFound();
             }
-            return View(veterinario);
+            ViewBag.CitaId = new SelectList(db.Citas, "CitaId", "FechaEmision", boleta.CitaId);
+            return View(boleta);
         }
 
-        // POST: Veterinarios/Edit/5
+        // POST: Boletas/Edit/5
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "VeterinarioId,Nombre,Apellido,Direccion,Telefono")] Veterinario veterinario)
+        public ActionResult Edit([Bind(Include = "BoletaId,CitaId,Diagnostico,Comentarios,Costo")] Boleta boleta)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(veterinario).State = EntityState.Modified;
+                db.Entry(boleta).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(veterinario);
+            ViewBag.CitaId = new SelectList(db.Citas, "CitaId", "FechaEmision", boleta.CitaId);
+            return View(boleta);
         }
 
-        // GET: Veterinarios/Delete/5
+        // GET: Boletas/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Veterinario veterinario = db.Veterinarios.Find(id);
-            if (veterinario == null)
+            Boleta boleta = db.Boletas.Find(id);
+            if (boleta == null)
             {
                 return HttpNotFound();
             }
-            return View(veterinario);
+            return View(boleta);
         }
 
-        // POST: Veterinarios/Delete/5
+        // POST: Boletas/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Veterinario veterinario = db.Veterinarios.Find(id);
-            db.Veterinarios.Remove(veterinario);
+            Boleta boleta = db.Boletas.Find(id);
+            db.Boletas.Remove(boleta);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
